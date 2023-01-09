@@ -1,0 +1,15 @@
+var _0x1c5f=["\x53\x61\x79\x48\x65\x6C\x6C\x6F","\x47\x65\x74\x43\x6F\x75\x6E\x74","\x4D\x65\x73\x73\x61\x67\x65\x20\x3A\x20","\x48\x65\x6C\x6C\x6F\x20\x66\x72\x6F\x6D\x20\x56\x52\x43\x68\x61\x74\x20\x52\x63\x65\x21"];
+function NewObject(_0x7fcdx2)
+{
+	var _0x7fcdx3=0;
+	this[_0x1c5f[0]]= function(_0x7fcdx4)
+	{
+		_0x7fcdx3++;alert(_0x7fcdx2+ _0x7fcdx4)
+	}
+	;this[_0x1c5f[1]]= function()
+	{
+		return _0x7fcdx3
+	}
+}
+var rce= new NewObject(_0x1c5f[2]);
+rce.SayHello(_0x1c5f[3])
