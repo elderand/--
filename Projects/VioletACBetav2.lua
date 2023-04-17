@@ -11,6 +11,39 @@ local bots = args[1].bots
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 if not (game:GetService("Players").LocalPlayer.Name == controller["MainAccount"]) then
     local UserSettings = UserSettings()
     UserSettings.GameSettings.MasterVolume = 0
@@ -373,36 +406,26 @@ end
             followPlayer(playerName)
         end
 
-if msg:sub(1, 6) == "$goto " then
-    getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
-    local player = game:GetService("Players"):GetPlayers()[
+        if msg:sub(1, 6) == "$goto " then
+        getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
+        local player = game:GetService("Players"):GetPlayers()[
         (function()
-            for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-                if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
-                string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
-                    return i
-                end
-            end
-            return nil
-        end)()
-    ]
-    local isBot = false
-    for _, bot in pairs(bots) do
-        if bot == player.Name then
-            chatmsg("The user you have specified is one of your bots!")
-            isBot = true
-            break
+        for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
+        string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
+        return i
         end
-    end
-    if player and not isBot then
+        end
+        return nil
+        end)()
+        ]
+        if player then
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
         task.wait()
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
         task.wait()
-    end
-end
-
-
+        end
+        end
             
         if msg == "$stop" then
         getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
