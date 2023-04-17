@@ -388,8 +388,8 @@ if msg:sub(1, 8) == "$follow " then
     
     local function followPlayer(playerName)
         for _, player in ipairs(Players:GetPlayers()) do
-            if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
-                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName)) then
+            if string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
+                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName) then
                 if player == LocalPlayer then
                     chatmsg("You cannot follow yourself!")
                 elseif table.find(bots, player.Name) then
@@ -409,9 +409,9 @@ if msg:sub(1, 8) == "$follow " then
             end
         end
     end
-    
     followPlayer(playerName)
 end
+
 
 
 
