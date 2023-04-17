@@ -378,7 +378,9 @@ if msg:sub(1, 6) == "$goto " then
         (function()
             for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
                 if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
-                string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
+                string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
+                string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7)):gsub("%s+", "")) == string.lower(msg:sub(7)):gsub("%s+", "") or
+                string.lower(plr.Name):sub(1, string.len(msg:sub(7)):gsub("%s+", "")) == string.lower(msg:sub(7)):gsub("%s+", "") then
                     return i
                 end
             end
@@ -392,19 +394,15 @@ if msg:sub(1, 6) == "$goto " then
                 return
             end
         end
-        local playerWorkspace = workspace[player.Name]
-        if playerWorkspace then
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = playerWorkspace.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
-            task.wait()
-            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
-            task.wait()
-        else
-            print("Player workspace is nil!")
-        end
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
+        task.wait()
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
+        task.wait()
     else
         chatmsg("User not found!")
     end
 end
+
 
 
             
