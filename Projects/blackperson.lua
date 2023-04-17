@@ -306,7 +306,7 @@ if msg:sub(1, 6) == "$wall " then
         local offsets = {4, 8, -4, -8, 12, -12, 16, -16, 20, -20}
         local offset = offsets[botIndex] or 0
         if player == game:GetService("Players").LocalPlayer then
-            chatmsg("You cannot go to yourself!")
+            chatmsg("The user you specified is one of your bots!")
         elseif table.find(bots, player.Name) then
             chatmsg("The user you specified is one of your bots!")
         else
@@ -344,7 +344,7 @@ end
                 local offsets = {-2, -4, -6, -8, -10, -12, -14, -16, -18, -20}
                 local offset = offsets[botIndex] or 0
         	if player == game:GetService("Players").LocalPlayer then
-            	chatmsg("You cannot go to yourself!")
+            	chatmsg("The user you specified is one of your bots!")
         	elseif table.find(bots, player.Name) then
             	chatmsg("The user you specified is one of your bots!")
         	else
@@ -362,7 +362,7 @@ if msg:sub(1, 7) == "$swarm " then
     for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
         if string.find(string.lower(plr.Name), string.lower(msg:sub(8))) or string.find(string.lower(plr.DisplayName), string.lower(msg:sub(8))) then
             if plr == game:GetService("Players").LocalPlayer then
-                chatmsg("You cannot go to yourself!")
+                chatmsg("The user you specified is one of your bots!")
             elseif table.find(bots, plr.Name) then
                 chatmsg("The user you specified is one of your bots!")
             else
@@ -388,7 +388,7 @@ if msg:sub(1, 8) == "$lookat " then
             if table.find(bots, plr.Name) then
                 chatmsg("The user you specified is one of your bots!")
             elseif plr == game:GetService("Players").LocalPlayer then
-                chatmsg("You cannot look at yourself!")
+                chatmsg("The user you specified is one of your bots!")
             else
                 local playerRootPart = game:GetService("Workspace"):FindFirstChild(plr.Name).HumanoidRootPart
                 getgenv().LoopLook = true
@@ -458,7 +458,7 @@ if msg:sub(1, 6) == "$goto " then
             if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
                 or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName)) then
                 if player == LocalPlayer then
-                    chatmsg("You cannot go to yourself!")
+                    chatmsg("The user you specified is one of your bots!")
                 elseif table.find(bots, player.Name) then
                     chatmsg("The user you specified is one of your bots!")
                 else
