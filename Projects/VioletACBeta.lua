@@ -4,8 +4,9 @@ if not game:IsLoaded() then
     game.Loaded:Wait() 
 end
 
-local controller = parseddata.botcontroller
-local bots = parseddata.botslist
+local args = {...}
+local controller = args[1]
+local bots = args[2]
 
 
 
