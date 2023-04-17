@@ -4,8 +4,8 @@ if not game:IsLoaded() then
     game.Loaded:Wait() 
 end
 
-local controller = args.controller
-local bots = args.bots
+local controller = args.botcontroller
+local bots = args.botslist
 
 
 
