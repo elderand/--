@@ -423,24 +423,33 @@ end
 if msg:sub(1, 6) == "$goto " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
     local playerName = msg:sub(7)
-    local player = nil
-    for _, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-        if string.lower(plr.Name):sub(1, #playerName) == string.lower(playerName) or string.lower(plr.DisplayName):sub(1, #playerName) == string.lower(playerName) then
-            player = plr
-            break
+    local Players = game:GetService("Players")
+    local LocalPlayer = Players.LocalPlayer
+
+    local function gotoPlayer(playerName)
+        for _, player in ipairs(Players:GetPlayers()) do
+            if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
+                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName)) then
+                if player == LocalPlayer then
+                    chatmsg("You cannot go to yourself!")
+                elseif table.find(bots, player.Name) then
+                    chatmsg("The user you specified is one of your bots!")
+                else
+                    local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+                    if humanoidRootPart then
+                        LocalPlayer.Character.HumanoidRootPart.CFrame = humanoidRootPart.CFrame * CFrame.new(0, 0, -2)
+                        task.wait()
+                        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
+                        task.wait()
+                    end
+                end
+            end
         end
     end
-    if player == game:GetService("Players").LocalPlayer then
-        chatmsg("The user you specified is one of your bots!")
-    elseif player and table.find(bots, player.Name) then
-        chatmsg("The user you specified is one of your bots!")
-    elseif player then
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
-        task.wait()
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
-        task.wait()
-    end
+
+    gotoPlayer(playerName)
 end
+
 
             
         if msg == "$stop" then
