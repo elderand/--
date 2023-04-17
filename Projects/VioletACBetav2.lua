@@ -373,33 +373,29 @@ end
             followPlayer(playerName)
         end
 
-        if msg:sub(1, 6) == "$goto " then
-        getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
-        local player = game:GetService("Players"):GetPlayers()[
-        (function()
-        for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-        if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
-        string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
-        return i
+if msg:sub(1, 6) == "$goto " then
+    getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
+    local playerName = string.lower(msg:sub(7))
+    local player = nil
+    for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
+        if string.lower(plr.Name):sub(1, string.len(playerName)) == playerName or
+        string.lower(plr.DisplayName):sub(1, string.len(playerName)) == playerName then
+            player = plr
+            break
         end
-        end
-        return nil
-        end)()
-        ]
-        for _, bot in pairs(bots) do
-        if bot == player then
+    end
+    if not player then
+        chatmsg("The user you have specified cannot be found!")
+    elseif table.find(bots, player.Name) then
         chatmsg("The user you have specified is one of your bots!")
-        return
-        end
-        end
-        else
-        if not bot then
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
+    else
+        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = player.Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
         task.wait()
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
         task.wait()
-        end
-        end
+    end
+end
+
             
         if msg == "$stop" then
         getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
