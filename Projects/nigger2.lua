@@ -378,6 +378,9 @@ end
             for _, plr in ipairs(game:GetService("Players"):GetPlayers()) do
                 if string.lower(plr.Name):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) or
                    string.lower(plr.DisplayName):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) then
+                    if table.find(bots, player.Name) then
+                    chatmsg("The user you specified is one of your bots!")
+                    else
                     local playerRootPart = game:GetService("Workspace"):FindFirstChild(plr.Name).HumanoidRootPart
                     getgenv().LoopLook = true
                     while getgenv().LoopLook == true do
@@ -387,6 +390,7 @@ end
                 end
             end
         end
+    end
 
 if msg:sub(1, 8) == "$follow " then
     local playerName = msg:sub(9)
