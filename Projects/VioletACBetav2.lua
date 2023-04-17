@@ -5,8 +5,8 @@ if not game:IsLoaded() then
 end
 
 local args = {...}
-local controller = args[1].botcontroller
-local bots = args[1].botslist
+local controller = args[1].controller
+local bots = args[1].bots
 
 
 
