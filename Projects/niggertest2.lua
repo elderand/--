@@ -391,7 +391,7 @@ if msg:sub(1, 8) == "$follow " then
             if string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
                 or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName) then
                 if player == LocalPlayer then
-                    chatmsg("You cannot follow yourself!")
+                    chatmsg("The user you specified is one of your bots!")
                 elseif table.find(bots, player.Name) then
                     chatmsg("The user you specified is one of your bots!")
                 else
