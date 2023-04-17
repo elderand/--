@@ -140,9 +140,11 @@ end
     if msg == "$cmds" then
         if game.Players.LocalPlayer.Name == bots[1] then
         task.wait()
-        chatmsg("Cmds With Arguments List: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $lookat [plr] | $follow [plr] | $goto [plr] | $runlua [code]")
+        chatmsg("Cmds With Arguments Pg 1: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $lookat [plr] | $follow [plr] | $goto [plr] | $runlua [code]")
         task.wait(1)
-        chatmsg("Cmds Without Arguments List: $re | $rj | $playercount | $infoforskids | $dance1 | $dance2 | $dance3 | $dance4 | $laugh | $wave | $cheer | $point | $jump")
+        chatmsg("Cmds With Arguments Pg 2: $runlua [code] | $calculate [equation]")
+        task.wait(1)
+        chatmsg("Cmds Without Arguments List: $re | $rj | $playercount | $dance1 | $dance2 | $dance3 | $dance4 | $laugh | $wave | $cheer | $point | $jump")
         task.wait(1)
         chatmsg("Stop Cmds: $stop (for wall,swarm,line,lookat,follow cmds) | $unspam (for slowspam,fastspam cmds) | $stopemotes (self explanatory)")
         elseif game.Players.LocalPlayer.Name ~= bots[1] then
