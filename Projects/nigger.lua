@@ -343,6 +343,11 @@ end
                 end
                 local offsets = {-2, -4, -6, -8, -10, -12, -14, -16, -18, -20}
                 local offset = offsets[botIndex] or 0
+        	if player == game:GetService("Players").LocalPlayer then
+            	chatmsg("You cannot go to yourself!")
+        	elseif table.find(bots, player.Name) then
+            	chatmsg("The user you specified is one of your bots!")
+        	else
                 getgenv().LoopLine = true
                 while getgenv().LoopLine do
                     game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, offset)
