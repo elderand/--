@@ -357,6 +357,15 @@ end
                 for _, player in ipairs(Players:GetPlayers()) do
                     if string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
                         or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName) then
+                        local isBot = false
+                        for _, bot in pairs(bots) do
+                        if bot == player.Name then
+                        chatmsg("The user you have specified is one of your bots!")
+                        isBot = true
+                        break
+                        end
+                        end
+                        if player and not isBot then
                         local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
                         if humanoidRootPart then
                             getgenv().LoopFollow = true
