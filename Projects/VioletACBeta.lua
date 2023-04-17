@@ -392,14 +392,20 @@ if msg:sub(1, 6) == "$goto " then
                 return
             end
         end
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
-        task.wait()
-        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
-        task.wait()
+        local playerWorkspace = workspace[player.Name]
+        if playerWorkspace then
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = playerWorkspace.HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
+            task.wait()
+            game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
+            task.wait()
+        else
+            print("Player workspace is nil!")
+        end
     else
         chatmsg("User not found!")
     end
 end
+
 
             
         if msg == "$stop" then
