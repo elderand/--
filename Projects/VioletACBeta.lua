@@ -4,22 +4,10 @@ if not game:IsLoaded() then
     game.Loaded:Wait() 
 end
 
-local controller = {                
-    ["MainAccount"] = "loadstringdata"
-}
+local controller = args.controller
+local bots = args.bots
 
-local bots = {                       
-    [1] = 'loadstringdata',         
-    [2] = 'loadstringdata',
-    [3] = 'loadstringdata',
-    [4] = 'loadstringdata',
-    [5] = 'loadstringdata',
-    [6] = 'loadstringdata',
-    [7] = 'loadstringdata',
-    [8] = 'loadstringdata',
-    [9] = 'loadstringdata',
-    [10] = 'loadstringdata'
-}
+
 
 if not (game:GetService("Players").LocalPlayer.Name == controller["MainAccount"]) then
     local UserSettings = UserSettings()
