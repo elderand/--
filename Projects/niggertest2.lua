@@ -409,6 +409,8 @@ local function followPlayer(playerName)
         end
     end
 end
+   followPlayer(playerName)
+end
 
 
 
