@@ -381,39 +381,36 @@ if msg:sub(1, 8) == "$follow " then
         task.wait()
     end
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
-    
+
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
-    
+
     local function followPlayer(playerName)
-        local playerFound = false
         for _, player in ipairs(Players:GetPlayers()) do
-            if string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
-                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName) then
-                playerFound = true
-                if not table.find(bots, player.Name) then -- check if player is not a bot
-                    local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-                    if humanoidRootPart then
-                        getgenv().LoopFollow = true
-                        while getgenv().LoopFollow == true do
-                            if (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude > 3 then
-                                LocalPlayer.Character.Humanoid:MoveTo(humanoidRootPart.Position)
-                            end
-                            task.wait()
+            if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
+                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName))
+                and player ~= LocalPlayer then
+                local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    getgenv().LoopFollow = true
+                    while getgenv().LoopFollow == true do
+                        if (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude > 3 then
+                            LocalPlayer.Character.Humanoid:MoveTo(humanoidRootPart.Position)
                         end
+                        task.wait()
                     end
-                else -- player is a bot
-                    chatmsg("The user you specified is one of your bots!")
                 end
-                break
+            elseif player == LocalPlayer then
+                chatmsg("The user you specified is yourself!")
+                return
             end
         end
-        if not playerFound then
-            chatmsg("The user you specified was not found.")
-        end
+        chatmsg("The user you specified is not in the game!")
     end
+
     followPlayer(playerName)
 end
+
 
 
 
