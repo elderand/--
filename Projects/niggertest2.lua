@@ -282,36 +282,43 @@ end
         end
         end
 
-        if msg:sub(1, 6) == "$wall " then
-            getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
-            local player = game:GetService("Players"):GetPlayers()[
-                (function()
-                    for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-                        if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
-                            string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
-                            return i
-                        end
-                    end
-                    return nil
-                end)()
-            ]
-            if player then
-                local botIndex = 1
-                for i, botName in pairs(bots) do
-                    if string.lower(botName) == string.lower(game:GetService("Players").LocalPlayer.Name) then
-                        botIndex = i
-                        break
-                    end
-                end
-                local offsets = {4, 8, -4, -8, 12, -12, 16, -16, 20, -20}
-                local offset = offsets[botIndex] or 0
-                getgenv().LoopWall = true
-                while getgenv().LoopWall do
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(offset, 0, 0)
-                    task.wait()
+if msg:sub(1, 6) == "$wall " then
+    getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
+    local player = game:GetService("Players"):GetPlayers()[
+        (function()
+            for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
+                if string.lower(plr.Name):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) or
+                    string.lower(plr.DisplayName):sub(1, string.len(msg:sub(7))) == string.lower(msg:sub(7)) then
+                    return i
                 end
             end
+            return nil
+        end)()
+    ]
+    if player then
+        local botIndex = 1
+        for i, botName in pairs(bots) do
+            if string.lower(botName) == string.lower(game:GetService("Players").LocalPlayer.Name) then
+                botIndex = i
+                break
+            end
         end
+        local offsets = {4, 8, -4, -8, 12, -12, 16, -16, 20, -20}
+        local offset = offsets[botIndex] or 0
+        if player == game:GetService("Players").LocalPlayer then
+            chatmsg("You cannot go to yourself!")
+        elseif table.find(bots, player.Name) then
+            chatmsg("The user you specified is one of your bots!")
+        else
+            getgenv().LoopWall = true
+            while getgenv().LoopWall do
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(offset, 0, 0)
+                task.wait()
+            end
+        end
+    end
+end
+
         
         if msg:sub(1, 6) == "$line " then
             getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
