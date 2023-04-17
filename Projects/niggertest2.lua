@@ -385,11 +385,20 @@ if msg:sub(1, 8) == "$follow " then
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
     
+    local function isBot(playerName)
+        for _, botName in ipairs(bots) do
+            if string.lower(botName) == string.lower(playerName) then
+                return true
+            end
+        end
+        return false
+    end
+    
     local function followPlayer(playerName)
         for _, player in ipairs(Players:GetPlayers()) do
             if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
                 or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName))
-                and not table.find(bots, player.Name) then -- check if player is not a bot
+                and not isBot(player.Name) then -- check if player is not a bot
                 local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
                 if humanoidRootPart then
                     getgenv().LoopFollow = true
@@ -400,7 +409,7 @@ if msg:sub(1, 8) == "$follow " then
                         task.wait()
                     end
                 end
-            elseif table.find(bots, player.Name) then -- check if player is a bot
+            elseif isBot(player.Name) then -- check if player is a bot
                 chatmsg("The user you specified is one of your bots!")
                 return
             end
@@ -408,6 +417,7 @@ if msg:sub(1, 8) == "$follow " then
     end
     followPlayer(playerName)
 end
+
 
 
         if msg:sub(1, 6) == "$goto " then
