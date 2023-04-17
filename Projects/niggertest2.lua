@@ -386,29 +386,30 @@ if msg:sub(1, 8) == "$follow " then
     local Players = game:GetService("Players")
     local LocalPlayer = Players.LocalPlayer
     
-    local function followPlayer(playerName)
-        for _, player in ipairs(Players:GetPlayers()) do
-            if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
-                or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName)) then
-                if table.find(bots, player.Name) then -- check if player is a bot
-                    chatmsg("The user you specified is one of your bots!")
-                else
-                    local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
-                    if humanoidRootPart then
-                        getgenv().LoopFollow = true
-                        while getgenv().LoopFollow == true do
-                            if (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude > 3 then
-                                LocalPlayer.Character.Humanoid:MoveTo(humanoidRootPart.Position)
-                            end
-                            task.wait()
+local function followPlayer(playerName)
+    for _, player in ipairs(Players:GetPlayers()) do
+        if (string.lower(player.Name):sub(1, #playerName) == string.lower(playerName)
+            or string.lower(player.DisplayName):sub(1, #playerName) == string.lower(playerName)) then
+            if player == LocalPlayer then
+                chatmsg("You cannot follow yourself!")
+            elseif table.find(bots, player.Name) then
+                chatmsg("The user you specified is one of your bots!")
+            else
+                local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
+                if humanoidRootPart then
+                    getgenv().LoopFollow = true
+                    while getgenv().LoopFollow == true do
+                        if (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude > 3 then
+                            LocalPlayer.Character.Humanoid:MoveTo(humanoidRootPart.Position)
                         end
+                        task.wait()
                     end
                 end
             end
         end
     end
-    followPlayer(playerName)
 end
+
 
 
 
