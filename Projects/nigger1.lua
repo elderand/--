@@ -355,6 +355,7 @@ end
                 end
             end
         end
+       end
 
         if msg:sub(1, 7) == "$swarm " then
             getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopGreet = false, false, false, false, false, false
