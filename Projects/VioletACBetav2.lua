@@ -386,7 +386,14 @@ end
         return nil
         end)()
         ]
-        if player then
+        for _, bot in pairs(bots) do
+        if bot == player then
+        chatmsg("The user you have specified is one of your bots!")
+        return
+        end
+        end
+        else
+        if not bot then
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
         task.wait()
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, player.Character.HumanoidRootPart.Position)
