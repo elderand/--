@@ -434,6 +434,11 @@ end
         return nil
         end)()
         ]
+        if player == game:GetService("Players").LocalPlayer then
+        chatmsg("The user you specified is one of your bots!")
+        elseif table.find(bots, player.Name) then
+        chatmsg("The user you specified is one of your bots!")
+        else
         if player then
         game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, -2)
         task.wait()
