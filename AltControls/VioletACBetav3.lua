@@ -76,7 +76,7 @@ if not (game:GetService("Players").LocalPlayer.Name == controller["MainAccount"]
 end
 for i, botName in ipairs(bots) do
     if game:GetService("Players").LocalPlayer.Name == botName then
-        ohString1 = "[" .. game:GetService("Players").LocalPlayer.Name .. "] has loaded! [" .. i .. "/" .. #bots .. "]"
+        ohString1 = "[" .. game:GetService("Players").LocalPlayer.DisplayName .. "] has loaded! [" .. i .. "/" .. #bots .. "]"
         game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(ohString1, "All")
         task.wait()
     end
