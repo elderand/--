@@ -140,7 +140,7 @@ end
     if msg == "$cmds" then
         if game.Players.LocalPlayer.Name == bots[1] then
         task.wait()
-        chatmsg("Cmds With Arguments Pg 1: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $lookat [plr] | $follow [plr] | $goto [plr] | $runlua [code]")
+        chatmsg("Cmds With Arguments Pg 1: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $lookat [plr] | $follow [plr] | $goto [plr]")
         task.wait(1)
         chatmsg("Cmds With Arguments Pg 2: $runlua [code] | $calculate [equation]")
         task.wait(1)
