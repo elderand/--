@@ -306,7 +306,7 @@ if msg:sub(1, 6) == "$wall " then
                 break
             end
         end
-        local offsets = {4, 8, -4, -8, 12, -12, 16, -16, 20, -20}
+        local offsets = {4, 8, -4, -8, 12, -12, 16, -16, 20, -20, 24, -24, 28, -28, 32, -32, 36, -36, 40, -40}
         local offset = offsets[botIndex] or 0
         if player == game:GetService("Players").LocalPlayer then
             chatmsg("The user you specified is one of your bots!")
@@ -344,7 +344,7 @@ end
                         break
                     end
                 end
-                local offsets = {-2, -4, -6, -8, -10, -12, -14, -16, -18, -20}
+                local offsets = {-2, -4, -6, -8, -10, -12, -14, -16, -18, -20, -22, -24, -26, -28, -30, -32, -34, -36, -38, -40}
                 local offset = offsets[botIndex] or 0
         	if player == game:GetService("Players").LocalPlayer then
             	chatmsg("The user you specified is one of your bots!")
