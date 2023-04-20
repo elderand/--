@@ -512,7 +512,7 @@ if msg:sub(1, 7) == "$stack " then
             PartForBot = Instance.new("Part", game:GetService("Workspace"))
             PartForBot.Name = "NewPartInstance"
             PartForBot.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
-            PartBot.Transparency = 1
+            PartForBot.Transparency = 1
             getgenv().LoopStack = true
             while getgenv().LoopStack == true do
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name]:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
