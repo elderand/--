@@ -139,7 +139,7 @@ end
     end
 
     if msg == "$cmds" then
-        if game.Players.LocalPlayer.Name == bots[1] then
+        if game:GetService("Players").LocalPlayer.Name == bots[1] then
         task.wait()
         chatmsg("Cmds With Arguments Pg 1: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $stack [plr] | $lookat [plr] | $follow [plr] | $goto [plr]")
         task.wait(1)
@@ -148,7 +148,7 @@ end
         chatmsg("Cmds Without Arguments List: $re | $rj | $playercount | $dance1 | $dance2 | $dance3 | $dance4 | $laugh | $wave | $cheer | $point | $jump")
         task.wait(1)
         chatmsg("Stop Cmds: $stop (for wall,swarm,line,lookat,follow cmds) | $unspam (for slowspam,fastspam cmds) | $stopemotes (self explanatory)")
-        elseif game.Players.LocalPlayer.Name ~= bots[1] then
+        elseif game:GetService("Players").LocalPlayer.Name ~= bots[1] then
             --
         end
     end
@@ -279,9 +279,9 @@ end
         }
 
         local response = answers[math.random(1, 20)]
-        if game.Players.LocalPlayer.Name == bots[1] then
+        if game:GetService("Players").LocalPlayer.Name == bots[1] then
         chatmsg(response)    
-        elseif game.Players.LocalPlayer.Name ~= bots[1] then    
+        elseif game:GetService("Players").LocalPlayer.Name ~= bots[1] then    
         end
         end
 
@@ -517,7 +517,7 @@ if msg:sub(1, 7) == "$stack " then
             while getgenv().LoopStack == true do
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name]:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
                 task.wait()
-                game:GetService("Workspace").NewPartInstance.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
+                game:GetService("Workspace").NewPartInstance.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
                 task.wait()
             end
         end
@@ -542,7 +542,7 @@ end
         end
  
         if msg == "$playercount" then
-        if game.Players.LocalPlayer.Name == bots[1] then
+        if game:GetService("Players").LocalPlayer.Name == bots[1] then
         local botAmount = 0
         for _, player in pairs(game:GetService("Players"):GetPlayers()) do
         if table.find(bots, player.Name) then
@@ -551,7 +551,7 @@ end
         end
         local playerAmount = #game:GetService("Players"):GetPlayers() - botAmount
         chatmsg("There are " .. #game:GetService("Players"):GetPlayers() .. " players currently in the server including " .. botAmount .. " bot(s), " .. playerAmount .. " players without the bot(s) being included!")
-        elseif game.Players.LocalPlayer.Name ~= bots[1] then
+        elseif game:GetService("Players").LocalPlayer.Name ~= bots[1] then
         --
         end
         end
