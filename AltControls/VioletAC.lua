@@ -483,10 +483,6 @@ end
             
 if msg:sub(1, 7) == "$stack " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopStack = false, false, false, false, false, false
-            for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
-                if v.Name == "PartForBot" then
-                    v:Destroy()
-                end
     local player = game:GetService("Players"):GetPlayers()[
         (function()
             for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
@@ -518,15 +514,22 @@ if msg:sub(1, 7) == "$stack " then
             PartForBot.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame
             PartForBot.Transparency = 1
             getgenv().LoopStack = true
-            while getgenv().LoopStack == true do
+            local currentPlayer = player
+            while getgenv().LoopStack == true and currentPlayer == player do
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name]:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
-                task.wait()
                 game:GetService("Workspace").NewPartInstance.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
                 task.wait()
+                currentPlayer = game:GetService("Players"):GetPlayerByUserId(player.UserId)
             end
+            for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if v.Name == "NewPartInstance" then
+                    v:Destroy()
+                end
+            end   
         end
     end
 end
+
             
 
 
