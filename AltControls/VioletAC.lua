@@ -483,6 +483,10 @@ end
             
 if msg:sub(1, 7) == "$stack " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopStack = false, false, false, false, false, false
+            for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if v.Name == "PartForBot" then
+                    v:Destroy()
+                end
     local player = game:GetService("Players"):GetPlayers()[
         (function()
             for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
