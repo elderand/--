@@ -515,7 +515,7 @@ if msg:sub(1, 7) == "$stack " then
             PartBot.Transparency = 1
             getgenv().LoopStack = true
             while getgenv().LoopStack == true do
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(offset, 0, 0)
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name]:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
                 task.wait()
                 game:GetService("Workspace").NewPartInstance.CFrame = game.Players.LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
                 task.wait()
