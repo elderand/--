@@ -313,7 +313,7 @@ if msg:sub(1, 6) == "$wall " then
         else
             getgenv().LoopWall = true
             while getgenv().LoopWall do
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(offset, 0, 0)
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[player.Name].Character.HumanoidRootPart.CFrame * CFrame.new(offset, 0, 0)
                 task.wait()
             end
         end
@@ -351,7 +351,7 @@ end
         	else
                 getgenv().LoopLine = true
                 while getgenv().LoopLine do
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name].HumanoidRootPart.CFrame * CFrame.new(0, 0, offset)
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[player.Name].Character.HumanoidRootPart.CFrame * CFrame.new(0, 0, offset)
                     task.wait()
                 end
             end
@@ -371,7 +371,7 @@ if msg:sub(1, 7) == "$swarm " then
                 if table.find(bots, game:GetService("Players").LocalPlayer.Name) then
                     getgenv().LoopSwarm = true
                     while getgenv().LoopSwarm == true do
-                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[plr.Name].HumanoidRootPart.CFrame * CFrame.new(math.random(-5,5),0,math.random(-5,5))
+                        game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[plr.Name].Character.HumanoidRootPart.CFrame * CFrame.new(math.random(-5,5),0,math.random(-5,5))
                         task.wait()
                     end
                 end
@@ -394,7 +394,7 @@ if msg:sub(1, 8) == "$lookat " then
                 local playerRootPart = game:GetService("Workspace"):FindFirstChild(plr.Name).HumanoidRootPart
                 getgenv().LoopLook = true
                 while getgenv().LoopLook == true do
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, workspace[plr.Name].HumanoidRootPart.Position)
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, game:GetService("Players")[player.Name].Character.HumanoidRootPart.Position)
                     task.wait()
                 end
             end
@@ -514,7 +514,7 @@ if msg:sub(1, 7) == "$stack " then
             getgenv().LoopStack = true
             local currentPlayer = player
             while getgenv().LoopStack == true and currentPlayer == player do
-                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = workspace[player.Name]:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[player.Name].Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
                 game:GetService("Workspace").NewPartInstance.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
                 task.wait()
                 currentPlayer = game:GetService("Players"):GetPlayerByUserId(player.UserId)
