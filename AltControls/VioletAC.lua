@@ -395,24 +395,37 @@ if msg:sub(1, 7) == "$swarm " then
     end
 end
 
-
             
 if msg:sub(1, 8) == "$lookat " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopStack = false, false, false, false, false, false
-    for _, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-        if string.lower(plr.Name):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) or
-           string.lower(plr.DisplayName):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) then
-            if table.find(bots, plr.Name) then
-                chatmsg("The user you specified is one of your bots!")
-            elseif plr == game:GetService("Players").LocalPlayer then
-                chatmsg("You can't look at yourself!")
-            else
-                local playerRootPart = game:GetService("Workspace"):FindFirstChild(plr.Name).HumanoidRootPart
-                getgenv().LoopLook = true
-                while getgenv().LoopLook do
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, playerRootPart.Position)
-                    task.wait()
+    local player = game:GetService("Players"):GetPlayers()[
+        (function()
+            for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
+                if string.lower(plr.Name):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) or
+                    string.lower(plr.DisplayName):sub(1, string.len(msg:sub(9))) == string.lower(msg:sub(9)) then
+                    return i
                 end
+            end
+            return nil
+        end)()
+    ]
+    if player then
+        local botIndex = 1
+        for i, botName in pairs(bots) do
+            if string.lower(botName) == string.lower(game:GetService("Players").LocalPlayer.Name) then
+                botIndex = i
+                break
+            end
+        end
+        if player == game:GetService("Players").LocalPlayer then
+            chatmsg("The user you specified is one of your bots!")
+        elseif table.find(bots, player.Name) then
+            chatmsg("The user you specified is one of your bots!")
+        else
+            getgenv().LoopLook = true
+            while getgenv().LoopLook do
+                game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, game:GetService("Players")[player.Name].Character.HumanoidRootPart.Position)
+                task.wait()
             end
         end
     end
