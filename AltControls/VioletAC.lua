@@ -396,9 +396,7 @@ if msg:sub(1, 7) == "$swarm " then
 end
 
 
-
-
-        
+            
 if msg:sub(1, 8) == "$lookat " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopStack = false, false, false, false, false, false
     for _, plr in ipairs(game:GetService("Players"):GetPlayers()) do
@@ -407,18 +405,19 @@ if msg:sub(1, 8) == "$lookat " then
             if table.find(bots, plr.Name) then
                 chatmsg("The user you specified is one of your bots!")
             elseif plr == game:GetService("Players").LocalPlayer then
-                chatmsg("The user you specified is one of your bots!")
+                chatmsg("You can't look at yourself!")
             else
                 local playerRootPart = game:GetService("Workspace"):FindFirstChild(plr.Name).HumanoidRootPart
                 getgenv().LoopLook = true
-                while getgenv().LoopLook == true do
-                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, game:GetService("Players")[plr.Name].Character.HumanoidRootPart.Position)
+                while getgenv().LoopLook do
+                    game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.lookAt(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position, playerRootPart.Position)
                     task.wait()
                 end
             end
         end
     end
 end
+
 
 
 
@@ -445,7 +444,7 @@ if msg:sub(1, 8) == "$follow " then
                     local humanoidRootPart = player.Character and player.Character:FindFirstChild("HumanoidRootPart")
                     if humanoidRootPart then
                         getgenv().LoopFollow = true
-                        while getgenv().LoopFollow == true do
+                        while getgenv().LoopFollow do
                             if (LocalPlayer.Character.HumanoidRootPart.Position - humanoidRootPart.Position).Magnitude > 3 then
                                 LocalPlayer.Character.Humanoid:MoveTo(humanoidRootPart.Position)
                             end
@@ -532,7 +531,7 @@ if msg:sub(1, 7) == "$stack " then
             PartForBot.Transparency = 1
             getgenv().LoopStack = true
             local currentPlayer = player
-            while getgenv().LoopStack == true and currentPlayer == player do
+            while getgenv().LoopStack and currentPlayer == player do
                 game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Players")[player.Name].Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, offset, 0)
                 game:GetService("Workspace").NewPartInstance.CFrame = game:GetService("Players").LocalPlayer.Character:WaitForChild("HumanoidRootPart").CFrame * CFrame.new(0, -3.6, 0)
                 task.wait()
