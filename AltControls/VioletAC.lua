@@ -1,5 +1,3 @@
-task.wait()
-
 if not game:IsLoaded() then 
     game.Loaded:Wait() 
 end
@@ -138,16 +136,16 @@ end
         chatmsg(ohString1) 
     end
 
-    if msg == "$cmds" then
-        if game:GetService("Players").LocalPlayer.Name == bots[1] then
-        task.wait()
+    if msg:sub(1, 5) == "$cmds" and game:GetService("Players").LocalPlayer.Name == bots[1] then
+        local sussy = msg:sub(1, 7 )
+        if sussy == "1" then
         chatmsg("Cmds With Arguments Pg 1: $say [args] | $slowspam [args] | $fastspam [args] | $8ball [args] | $wall [plr] | $line [plr] | $swarm [plr] | $stack [plr] | $lookat [plr] | $follow [plr] | $goto [plr]")
-        task.wait(1)
+        elseif sussy == "2" then
         chatmsg("Cmds With Arguments Pg 2: $runlua [code] | $calculate [equation]")
-        task.wait(1)
-        chatmsg("Cmds Without Arguments List: $re | $rj | $playercount | $dance1 | $dance2 | $dance3 | $dance4 | $laugh | $wave | $cheer | $point | $jump")
-        task.wait(1)
-        chatmsg("Stop Cmds: $stop (for wall,swarm,line,lookat,follow cmds) | $unspam (for slowspam,fastspam cmds) | $stopemotes (self explanatory)")
+        elseif sussy == "3" then
+        chatmsg("Cmds Without Arguments Pg 3: $re | $rj | $playercount | $dance1 | $dance2 | $dance3 | $dance4 | $laugh | $wave | $cheer | $point | $jump")
+        elseif sussy == "4" then
+        chatmsg("Stop Cmds Pg 4: $stop (for wall,swarm,line,lookat,follow cmds) | $unspam (for slowspam,fastspam cmds) | $stopemotes (self explanatory)")
         elseif game:GetService("Players").LocalPlayer.Name ~= bots[1] then
             --
         end
