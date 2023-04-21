@@ -360,8 +360,15 @@ end
 
 if msg:sub(1, 7) == "$swarm " then
     getgenv().LoopSwarm, getgenv().LoopLine, getgenv().LoopWall, getgenv().LoopLook, getgenv().LoopFollow, getgenv().LoopStack = false, false, false, false, false, false
-    for i, plr in ipairs(game:GetService("Players"):GetPlayers()) do
-        if string.find(string.lower(plr.Name), string.lower(msg:sub(8))) or string.find(string.lower(plr.DisplayName), string.lower(msg:sub(8))) then
+    local playerName = msg:sub(8)
+    playerName = playerName:gsub("^%s*(.-)%s*$", "%1") -- Remove leading/trailing spaces
+    local players = game:GetService("Players"):GetPlayers()
+    for i, plr in ipairs(players) do
+        local playerNameLower = string.lower(playerName)
+        local nameLower = string.lower(plr.Name)
+        local displayNameLower = string.lower(plr.DisplayName)
+        local shortNameLower = string.lower(plr.Name:sub(1, #playerName))
+        if nameLower == playerNameLower or displayNameLower == playerNameLower or shortNameLower == playerNameLower then
             if plr == game:GetService("Players").LocalPlayer then
                 chatmsg("The user you specified is one of your bots!")
             elseif table.find(bots, plr.Name) then
@@ -376,9 +383,11 @@ if msg:sub(1, 7) == "$swarm " then
                     end
                 end
             end
+            break
         end
     end
 end
+
 
         
 if msg:sub(1, 8) == "$lookat " then
