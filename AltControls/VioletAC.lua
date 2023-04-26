@@ -569,6 +569,20 @@ end
         if msg == "$re" then
         game:GetService("Players").LocalPlayer.Character:Destroy()
         end
+           
+        if msg == "$trip" then
+        function getRoot(char)
+	    local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	    return rootPart
+        end
+        local lp = game:GetService("Players").LocalPlayer
+	    if lp and lp.Character and lp.Character:FindFirstChildOfClass("Humanoid") and getRoot(lp.Character) then
+		local hum = lp.Character:FindFirstChildOfClass("Humanoid")
+		local root = getRoot(lp.Character)
+		hum:ChangeState(0)
+		root.Velocity = root.CFrame.LookVector * 30
+	    end
+        end
  
         if msg == "$playercount" then
         if game:GetService("Players").LocalPlayer.Name == bots[1] then
